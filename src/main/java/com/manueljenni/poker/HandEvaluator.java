@@ -222,7 +222,7 @@ public class HandEvaluator {
 
     // Returns all numeric values of the cards
     // (sorted from lowest to highest)
-    private List<Integer> getValues(List<Card> cards) {
+    public List<Integer> getValues(List<Card> cards) {
         return cards.stream()
                 .map(card -> {
                     return card.getRank().getValue();

@@ -73,4 +73,68 @@ public class HandComparerTest {
         var winningHand = handComparer.getWinningHand(hand1, hand2);
         assertEquals(hand1, winningHand);
     }
+
+    @Test
+    void getWinningHand__FourAKind() {
+        Card card1 = Card.builder()
+                .rank(Rank.RANK_2)
+                .suit(Suit.D)
+                .build();
+
+        Card card2 = Card.builder()
+                .rank(Rank.RANK_2)
+                .suit(Suit.S)
+                .build();
+
+        Card card3 = Card.builder()
+                .rank(Rank.RANK_2)
+                .suit(Suit.C)
+                .build();
+
+        Card card4 = Card.builder()
+                .rank(Rank.RANK_2)
+                .suit(Suit.D)
+                .build();
+
+        Card card5 = Card.builder()
+                .rank(Rank.RANK_A)
+                .suit(Suit.D)
+                .build();
+
+        Hand hand1 = Hand.builder()
+                .cards(List.of(card1, card2, card3, card4, card5))
+                .build();
+
+        Card card6 = Card.builder()
+                .rank(Rank.RANK_A)
+                .suit(Suit.D)
+                .build();
+
+        Card card7 = Card.builder()
+                .rank(Rank.RANK_A)
+                .suit(Suit.D)
+                .build();
+
+        Card card8 = Card.builder()
+                .rank(Rank.RANK_A)
+                .suit(Suit.D)
+                .build();
+
+        Card card9 = Card.builder()
+                .rank(Rank.RANK_A)
+                .suit(Suit.D)
+                .build();
+
+        Card card10 = Card.builder()
+                .rank(Rank.RANK_2)
+                .suit(Suit.D)
+                .build();
+
+        Hand hand2 = Hand.builder()
+                .cards(List.of(card1, card2, card3, card4, card5))
+                .build();
+
+        var winningHand = handComparer.getWinningHand(hand1, hand2);
+        assertEquals(hand2, winningHand);
+    }
 }

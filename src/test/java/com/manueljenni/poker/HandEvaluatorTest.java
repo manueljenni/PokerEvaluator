@@ -139,8 +139,6 @@ public class HandEvaluatorTest {
                 .cards(List.of(card1, card2, card3, card4, card5))
                 .build();
 
-        System.out.println("Start fh test");
-
         hand.setType(handEvaluator.getType(hand));
 
         assertEquals(Type.FULL_HOUSE, hand.getType());
