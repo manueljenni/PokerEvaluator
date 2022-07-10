@@ -50,7 +50,8 @@ public class Evaluator {
     // Cards are of same suit
     // and with consecutive values
     private Boolean isStraightFlush(List<Card> cards) {
-        return false;
+        if (isStraight(cards) && isFlush(cards)) return true;
+        else return false;
     }
 
     // Four cards of the same value
@@ -66,7 +67,8 @@ public class Evaluator {
 
     // Five cards of the same suit
     private Boolean isFlush(List<Card> cards) {
-        return false;
+        if (isSameSuit(cards)) return true;
+        else return false;
     }
 
     // Five cards with consecutive values
@@ -110,7 +112,11 @@ public class Evaluator {
     // Checks if all given cards are
     // of the same suit
     private Boolean isSameSuit(List<Card> cards) {
-        return false;
+        List<String> suits = getSuits(cards);
+
+        return suits.stream()
+                .distinct()
+                .count() <= 1;
     }
 
     // Checks if all given cards are
@@ -136,7 +142,13 @@ public class Evaluator {
     }
 
     // Returns all suits of the cards as a list of strings
+    // (sorted alphabetically)
     private List<String> getSuits(List<Card> cards) {
-        return Collections.emptyList();
+        return cards.stream()
+                .map(card -> {
+                    return card.getSuit().toString();
+                })
+                .sorted()
+                .collect(Collectors.toList());
     }
 }
