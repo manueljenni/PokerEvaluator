@@ -1,0 +1,10 @@
+com\manueljenni\poker\Card.class
+com\manueljenni\poker\Card$CardBuilder.class
+com\manueljenni\poker\Suit.class
+com\manueljenni\poker\Type.class
+com\manueljenni\poker\Hand.class
+com\manueljenni\poker\HandEvaluator.class
+com\manueljenni\poker\Rank.class
+com\manueljenni\poker\Hand$HandBuilder.class
+com\manueljenni\poker\HandComparer.class
+com\manueljenni\poker\App.class
