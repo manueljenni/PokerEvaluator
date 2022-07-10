@@ -17,7 +17,7 @@ public class HandComparer {
         // Get "value" of hand
         // (numeric value assigned to each type)
         var handValue1 = hand1.getType().getValue();
-        var handValue2 = hand1.getType().getValue();
+        var handValue2 = hand2.getType().getValue();
 
         // Get hand types
         var handType1 = hand1.getType();
@@ -52,34 +52,51 @@ public class HandComparer {
                     }
                 }
                 return hand2;
+
             } else if (handType1 == Type.FOUR_A_KIND) {
-                // Determine score of first hand
-                var distinctValues1 = values1.stream()
-                        .distinct().toList();
 
-                if (Collections.frequency(distinctValues1, distinctValues1.get(0)) == 4) {
-                    score1 = values1.stream().filter(score -> values1.contains(distinctValues1.get(0)))
-                            .mapToInt(Integer::intValue).sum();
-                } else {
-                    score1 = values1.stream().filter(score -> values1.contains(distinctValues1.get(1)))
-                            .mapToInt(Integer::intValue).sum();
-                }
+                // Find scores that occur four times
+                // and get sum
 
-                // Determine score of second hand
-                var distinctValues2 = values1.stream()
-                        .distinct().toList();
+                score1 = values1.stream()
+                        .filter(x -> Collections.frequency(values1, x) == 4)
+                        .mapToInt(Integer::intValue).sum();
 
-                if (Collections.frequency(distinctValues1, distinctValues2.get(0)) == 4) {
-                    score2 = values2.stream().filter(score -> values2.contains(distinctValues1.get(0)))
-                            .mapToInt(Integer::intValue).sum();
-                } else {
-                    score2 = values2.stream().filter(score -> values2.contains(distinctValues1.get(1)))
-                            .mapToInt(Integer::intValue).sum();
-                }
+                score2 = values1.stream()
+                        .filter(x -> Collections.frequency(values2, x) == 4)
+                        .mapToInt(Integer::intValue).sum();
 
                 // Compare the two scores
                 if (score1 > score2) return hand1;
                 else return hand2;
+
+            } else if (handType1 == Type.FULL_HOUSE) {
+
+                score1 = values1.stream()
+                        .filter(x -> Collections.frequency(values1, x) == 3)
+                        .mapToInt(Integer::intValue).sum();
+
+                score2 = values1.stream()
+                        .filter(x -> Collections.frequency(values1, x) == 3)
+                        .mapToInt(Integer::intValue).sum();
+
+                // Compare the two scores
+                if (score1 > score2) return hand1;
+                else return hand2;
+
+            } else if (handType1 == Type.FLUSH) {
+
+                // Compare the highest cards
+                if (values1.get(4) > values2.get(4)) {
+                    return hand1;
+                } else if (values1.get(4) < values2.get(4)) {
+                    return hand2;
+                } else {
+                    // If two highest cards are the same
+                    // no winner can be chosen according to the
+                    // given rules
+                    throw new RuntimeException("Draw. :(");
+                }
             }
             return hand1;
         }

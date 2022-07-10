@@ -193,9 +193,6 @@ public class HandEvaluator {
             var frequency3 = Collections.frequency(values, distinctValues.get(2));
             var frequency4 = Collections.frequency(values, distinctValues.get(3));
 
-            System.out.println(values);
-            System.out.println(distinctValues);
-
             return frequency1 == 2 || frequency2 == 2 || frequency3 == 2 || frequency4 == 2;
         } else return false;
     }
