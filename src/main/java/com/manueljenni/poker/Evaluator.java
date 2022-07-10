@@ -77,7 +77,31 @@ public class Evaluator {
     // Three cards of the same value
     // and remaining cards being a pair
     private Boolean isFullHouse(List<Card> cards) {
-        return false;
+        var values = getValues(cards);
+
+        var distinctValues = values.stream()
+                .distinct().toList();
+
+        // If full house, two
+        // different card types must be present
+        if (distinctValues.size() == 2) {
+
+            // Sublist of cards with same rank
+            // (e.g. [5, 5, 5] or [A, A])
+
+            var sublist1 = cards.stream()
+                    .filter(card -> card.getRank().getValue()
+                            == distinctValues.get(0)
+                    ).toList();
+            var sublist2 = cards.stream()
+                    .filter(card -> card.getRank().getValue()
+                            == distinctValues.get(1)
+                    ).toList();
+
+            // Check if combination is full house
+            return (sublist1.size() == 2 && sublist2.size() == 3) || (sublist1.size() == 3 && sublist2.size() == 2);
+
+        } else return false;
     }
 
     // Five cards of the same suit
@@ -121,7 +145,7 @@ public class Evaluator {
         if (distinctValues.size() < 4) {
 
             // One of the "distinct" cards
-            // must be present 3 times
+            // must be present three times
             var frequency1 = Collections.frequency(values, distinctValues.get(0));
             var frequency2 = Collections.frequency(values, distinctValues.get(1));
             var frequency3 = Collections.frequency(values, distinctValues.get(2));
@@ -132,12 +156,48 @@ public class Evaluator {
 
     // Two different pairs
     private Boolean isTwoPairs(List<Card> cards) {
-        return false;
+        var values = getValues(cards);
+
+        var distinctValues = values.stream()
+                .distinct().toList();
+
+        // If there are two pairs, there can
+        // only be three different kinds of cards
+        if (distinctValues.size() == 3) {
+
+            // One of the "distinct" cards
+            // must be present two times
+            var frequency1 = Collections.frequency(values, distinctValues.get(0));
+            var frequency2 = Collections.frequency(values, distinctValues.get(1));
+            var frequency3 = Collections.frequency(values, distinctValues.get(2));
+
+            return frequency1 == 2 || frequency2 == 2 || frequency3 == 2;
+        } else return false;
     }
 
     // Two cards with same value
     private Boolean isPair(List<Card> cards) {
-        return false;
+        var values = getValues(cards);
+
+        var distinctValues = values.stream()
+                .distinct().toList();
+
+        // If there are two pairs, there will
+        // be four different kinds of cards
+        if (distinctValues.size() == 4) {
+
+            // One of the "distinct" cards
+            // must be present two times
+            var frequency1 = Collections.frequency(values, distinctValues.get(0));
+            var frequency2 = Collections.frequency(values, distinctValues.get(1));
+            var frequency3 = Collections.frequency(values, distinctValues.get(2));
+            var frequency4 = Collections.frequency(values, distinctValues.get(3));
+
+            System.out.println(values);
+            System.out.println(distinctValues);
+
+            return frequency1 == 2 || frequency2 == 2 || frequency3 == 2 || frequency4 == 2;
+        } else return false;
     }
 
     // Checks if all given cards are
