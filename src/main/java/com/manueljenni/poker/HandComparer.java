@@ -63,7 +63,7 @@ public class HandComparer {
                         .filter(x -> Collections.frequency(values1, x) == 4)
                         .mapToInt(Integer::intValue).sum();
 
-                score2 = values1.stream()
+                score2 = values2.stream()
                         .filter(x -> Collections.frequency(values2, x) == 4)
                         .mapToInt(Integer::intValue).sum();
 
@@ -79,8 +79,8 @@ public class HandComparer {
                         .filter(x -> Collections.frequency(values1, x) == 3)
                         .mapToInt(Integer::intValue).sum();
 
-                score2 = values1.stream()
-                        .filter(x -> Collections.frequency(values1, x) == 3)
+                score2 = values2.stream()
+                        .filter(x -> Collections.frequency(values2, x) == 3)
                         .mapToInt(Integer::intValue).sum();
 
                 // Compare the two scores
@@ -99,6 +99,53 @@ public class HandComparer {
                     // no winner can be chosen according to the
                     // given rules
                     throw new RuntimeException("Draw. :(");
+                }
+
+            } else if (handType1 == Type.TWO_PAIRS) {
+
+                // Find scores that occur twice
+                var higherPair1 = values1.stream()
+                        .filter(x -> Collections.frequency(values1, x) == 2)
+                        .mapToInt(Integer::intValue).max().orElse(0);
+
+                var lowerPair1 = values1.stream()
+                        .filter(x -> Collections.frequency(values1, x) == 2)
+                        .mapToInt(Integer::intValue).min().orElse(0);
+
+                var singleValue1 = values1.stream()
+                        .filter(x -> Collections.frequency(values1, x) == 1)
+                        .mapToInt(Integer::intValue).min().orElse(0);
+
+                var higherPair2 = values2.stream()
+                        .filter(x -> Collections.frequency(values2, x) == 2)
+                        .mapToInt(Integer::intValue).min().orElse(0);
+
+                var lowerPair2 = values1.stream()
+                        .filter(x -> Collections.frequency(values2, x) == 2)
+                        .mapToInt(Integer::intValue).min().orElse(0);
+
+                var singleValue2 = values1.stream()
+                        .filter(x -> Collections.frequency(values2, x) == 1)
+                        .mapToInt(Integer::intValue).min().orElse(0);
+
+                if (higherPair1 > higherPair2) {
+                    return hand1;
+                } else if (higherPair1 < higherPair2) {
+                    return hand2;
+                } else {
+                    if (lowerPair1 > lowerPair2) {
+                        return hand1;
+                    } else if (lowerPair1 < lowerPair2) {
+                        return hand2;
+                    } else {
+                        if (singleValue1 > singleValue2) {
+                            return hand1;
+                        } else if (singleValue1 < singleValue2) {
+                            return hand2;
+                        } else {
+                            throw new RuntimeException("Draw. :(");
+                        }
+                    }
                 }
 
             }
