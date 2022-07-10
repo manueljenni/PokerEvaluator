@@ -178,8 +178,14 @@ public class HandComparer {
                     }
                     return hand2;
                 }
+            } else {
+                for (int i = 0; i < values1.size(); i++) {
+                    if (values1.get(i) > values2.get(i)) {
+                        return hand1;
+                    }
+                }
+                return hand2;
             }
-            return hand1;
         }
     }
 }

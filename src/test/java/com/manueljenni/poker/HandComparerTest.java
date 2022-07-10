@@ -67,11 +67,11 @@ public class HandComparerTest {
                 .build();
 
         Hand hand2 = Hand.builder()
-                .cards(List.of(card1, card2, card3, card4, card5))
+                .cards(List.of(card6, card7, card8, card9, card10))
                 .build();
 
         var winningHand = handComparer.getWinningHand(hand1, hand2);
-        assertEquals(hand1, winningHand);
+        assertEquals(hand2, winningHand);
     }
 
     @Test
