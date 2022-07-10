@@ -1,5 +1,8 @@
 package com.manueljenni.poker;
 
+import lombok.Getter;
+
+@Getter
 public enum Type {
 
     // Type of poker hand

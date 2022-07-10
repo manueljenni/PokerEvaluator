@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Evaluator {
+public class HandEvaluator {
 
     // This will determine what kind of
     // type a given hand is

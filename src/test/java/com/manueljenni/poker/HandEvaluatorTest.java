@@ -7,9 +7,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class EvaluatorTest {
+public class HandEvaluatorTest {
 
-    Evaluator evaluator = new Evaluator();
+    HandEvaluator handEvaluator = new HandEvaluator();
 
     @Test
     // Checks that only valid hands (5 cards) are processed
@@ -25,7 +25,7 @@ public class EvaluatorTest {
                 .build();
 
         Exception exception = assertThrows(RuntimeException.class, () -> {
-                    hand.setType(evaluator.getType(hand));
+                    hand.setType(handEvaluator.getType(hand));
                 }
         );
 
@@ -65,7 +65,7 @@ public class EvaluatorTest {
                 .cards(List.of(card1, card2, card3, card4, card5))
                 .build();
 
-        hand.setType(evaluator.getType(hand));
+        hand.setType(handEvaluator.getType(hand));
 
         assertEquals(Type.STRAIGHT_FLUSH, hand.getType());
     }
@@ -102,7 +102,7 @@ public class EvaluatorTest {
                 .cards(List.of(card1, card2, card3, card4, card5))
                 .build();
 
-        hand.setType(evaluator.getType(hand));
+        hand.setType(handEvaluator.getType(hand));
 
         assertEquals(Type.FOUR_A_KIND, hand.getType());
     }
@@ -141,7 +141,7 @@ public class EvaluatorTest {
 
         System.out.println("Start fh test");
 
-        hand.setType(evaluator.getType(hand));
+        hand.setType(handEvaluator.getType(hand));
 
         assertEquals(Type.FULL_HOUSE, hand.getType());
     }
@@ -178,7 +178,7 @@ public class EvaluatorTest {
                 .cards(List.of(card1, card2, card3, card4, card5))
                 .build();
 
-        hand.setType(evaluator.getType(hand));
+        hand.setType(handEvaluator.getType(hand));
 
         assertEquals(Type.FLUSH, hand.getType());
     }
@@ -215,7 +215,7 @@ public class EvaluatorTest {
                 .cards(List.of(card1, card2, card3, card4, card5))
                 .build();
 
-        hand.setType(evaluator.getType(hand));
+        hand.setType(handEvaluator.getType(hand));
 
         assertEquals(Type.STRAIGHT, hand.getType());
     }
@@ -252,7 +252,7 @@ public class EvaluatorTest {
                 .cards(List.of(card1, card2, card3, card4, card5))
                 .build();
 
-        hand.setType(evaluator.getType(hand));
+        hand.setType(handEvaluator.getType(hand));
 
         assertEquals(Type.THREE_A_KIND, hand.getType());
     }
@@ -289,7 +289,7 @@ public class EvaluatorTest {
                 .cards(List.of(card1, card2, card3, card4, card5))
                 .build();
 
-        hand.setType(evaluator.getType(hand));
+        hand.setType(handEvaluator.getType(hand));
 
         assertEquals(Type.TWO_PAIRS, hand.getType());
     }
@@ -326,7 +326,7 @@ public class EvaluatorTest {
                 .cards(List.of(card1, card2, card3, card4, card5))
                 .build();
 
-        hand.setType(evaluator.getType(hand));
+        hand.setType(handEvaluator.getType(hand));
 
         assertEquals(Type.PAIR, hand.getType());
     }
