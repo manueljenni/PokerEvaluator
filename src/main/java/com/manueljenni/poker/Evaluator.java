@@ -1,5 +1,6 @@
 package com.manueljenni.poker;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Evaluator {
@@ -91,5 +92,26 @@ public class Evaluator {
     // of the same suit
     private Boolean isSameSuit(List<Card> cards) {
         return false;
+    }
+
+    // Checks if all given cards are
+    // of the same value
+    private Boolean isSameValue(List<Card> cards) {
+        return false;
+    }
+
+    // Returns all numeric values of the cards
+    private List<Integer> getValues(List<Card> cards) {
+        return Collections.emptyList();
+    }
+
+    // Returns all ranks of the cards as a list of strings
+    private List<String> getRanks(List<Card> cards) {
+        return Collections.emptyList();
+    }
+
+    // Returns all suits of the cards as a list of strings
+    private List<String> getSuits(List<Card> cards) {
+        return Collections.emptyList();
     }
 }
