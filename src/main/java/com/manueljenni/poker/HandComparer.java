@@ -34,15 +34,17 @@ public class HandComparer {
 
         // Compare values
         if (handValue1 > handValue2) {
+
             return hand1;
+
         } else if (handValue1 < handValue2) {
+
             return hand2;
+
         } else {
+
             // Handle same values
-            if (handType1 == Type.STRAIGHT_FLUSH) {
-                // Highest card in each hand's win
-                score1 = values1.stream().max(Comparator.naturalOrder()).orElse(0);
-                score2 = values2.stream().max(Comparator.naturalOrder()).orElse(0);
+            if (handType1 == Type.STRAIGHT_FLUSH || handType1 == Type.FLUSH) {
 
                 // Compare all values in hands,
                 // starting from highest
@@ -84,7 +86,7 @@ public class HandComparer {
                 if (score1 > score2) return hand1;
                 else return hand2;
 
-            } else if (handType1 == Type.FLUSH) {
+            } else if (handType1 == Type.STRAIGHT) {
 
                 // Compare the highest cards
                 if (values1.get(4) > values2.get(4)) {
@@ -97,6 +99,7 @@ public class HandComparer {
                     // given rules
                     throw new RuntimeException("Draw. :(");
                 }
+
             }
             return hand1;
         }
