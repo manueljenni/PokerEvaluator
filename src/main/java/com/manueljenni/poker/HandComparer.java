@@ -59,7 +59,6 @@ public class HandComparer {
 
                 // Find scores that occur four times
                 // and get sum
-
                 score1 = values1.stream()
                         .filter(x -> Collections.frequency(values1, x) == 4)
                         .mapToInt(Integer::intValue).sum();
@@ -72,8 +71,10 @@ public class HandComparer {
                 if (score1 > score2) return hand1;
                 else return hand2;
 
-            } else if (handType1 == Type.FULL_HOUSE) {
+            } else if (handType1 == Type.FULL_HOUSE || handType1 == Type.THREE_A_KIND) {
 
+                // Find scores that occur three times
+                // and get sum
                 score1 = values1.stream()
                         .filter(x -> Collections.frequency(values1, x) == 3)
                         .mapToInt(Integer::intValue).sum();
