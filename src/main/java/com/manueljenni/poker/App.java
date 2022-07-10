@@ -5,6 +5,12 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
 
+        /*
+            This is just an example of how cards, hands etc. work.
+            All the tests demonstrating the solution
+            can be found in src/test/java/com.manueljenni.poker/*
+         */
+
         HandComparer handComparer = new HandComparer();
 
         Card card1 = Card.builder()
@@ -72,7 +78,7 @@ public class App {
             winningHandText = "Hand 1";
         } else winningHandText = "Hand 2";
 
-        System.out.printf("Winning hand: hand %s%n", winningHandText);
+        System.out.printf("Winning hand: %s%n", winningHandText);
 
     }
 }
