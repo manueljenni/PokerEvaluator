@@ -39,7 +39,7 @@ public class Evaluator {
 
         } else {
             throw new RuntimeException(String.format(
-                    "A valid hand must consist of exactly 5 cards. You entered %size cards.",
+                    "A valid hand must consist of exactly 5 cards. You provided %s cards.",
                     cards.size()
             ));
         }
@@ -47,49 +47,49 @@ public class Evaluator {
 
     // Cards are of same suit
     // and with consecutive values
-    public Boolean isStraightFlush(List<Card> cards) {
-
+    private Boolean isStraightFlush(List<Card> cards) {
+        return false;
     }
 
     // Four cards of the same value
-    public Boolean isFourAKind(List<Card> cards) {
-
+    private Boolean isFourAKind(List<Card> cards) {
+        return false;
     }
 
     // Three cards of the same value
     // and remaining cards being a pair
-    public Boolean isFullHouse(List<Card> cards) {
-
+    private Boolean isFullHouse(List<Card> cards) {
+        return false;
     }
 
     // Five cards of the same suit
-    public Boolean isFlush(List<Card> cards) {
-
+    private Boolean isFlush(List<Card> cards) {
+        return false;
     }
 
     // Five cards with consecutive values
-    public Boolean isStraight(List<Card> cards) {
-
+    private Boolean isStraight(List<Card> cards) {
+        return false;
     }
 
     // Three cards of the same value
-    public Boolean isThreeAKind(List<Card> cards) {
-
+    private Boolean isThreeAKind(List<Card> cards) {
+        return false;
     }
 
     // Two different pairs
-    public Boolean isTwoPairs(List<Card> cards) {
-
+    private Boolean isTwoPairs(List<Card> cards) {
+        return false;
     }
 
     // Two cards with same value
-    public Boolean isPair(List<Card> cards) {
-
+    private Boolean isPair(List<Card> cards) {
+        return false;
     }
 
     // Checks if all given cards are
     // of the same suit
-    public Boolean isSameSuit(List<Card> cards) {
-
+    private Boolean isSameSuit(List<Card> cards) {
+        return false;
     }
 }
