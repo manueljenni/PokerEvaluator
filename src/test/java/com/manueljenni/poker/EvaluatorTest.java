@@ -71,6 +71,43 @@ public class EvaluatorTest {
     }
 
     @Test
+    void getType__isFourAKind() {
+
+        Card card1 = Card.builder()
+                .rank(Rank.RANK_8)
+                .suit(Suit.D)
+                .build();
+
+        Card card2 = Card.builder()
+                .rank(Rank.RANK_8)
+                .suit(Suit.S)
+                .build();
+
+        Card card3 = Card.builder()
+                .rank(Rank.RANK_8)
+                .suit(Suit.D)
+                .build();
+
+        Card card4 = Card.builder()
+                .rank(Rank.RANK_J)
+                .suit(Suit.S)
+                .build();
+
+        Card card5 = Card.builder()
+                .rank(Rank.RANK_8)
+                .suit(Suit.D)
+                .build();
+
+        Hand hand = Hand.builder()
+                .cards(List.of(card1, card2, card3, card4, card5))
+                .build();
+
+        hand.setType(evaluator.getType(hand));
+
+        assertEquals(Type.FOUR_A_KIND, hand.getType());
+    }
+
+    @Test
     void getType__isStraight() {
 
         Card card1 = Card.builder()
@@ -105,6 +142,43 @@ public class EvaluatorTest {
         hand.setType(evaluator.getType(hand));
 
         assertEquals(Type.STRAIGHT, hand.getType());
+    }
+
+    @Test
+    void getType__isThreeAKind() {
+
+        Card card1 = Card.builder()
+                .rank(Rank.RANK_8)
+                .suit(Suit.D)
+                .build();
+
+        Card card2 = Card.builder()
+                .rank(Rank.RANK_8)
+                .suit(Suit.S)
+                .build();
+
+        Card card3 = Card.builder()
+                .rank(Rank.RANK_A)
+                .suit(Suit.D)
+                .build();
+
+        Card card4 = Card.builder()
+                .rank(Rank.RANK_J)
+                .suit(Suit.S)
+                .build();
+
+        Card card5 = Card.builder()
+                .rank(Rank.RANK_8)
+                .suit(Suit.D)
+                .build();
+
+        Hand hand = Hand.builder()
+                .cards(List.of(card1, card2, card3, card4, card5))
+                .build();
+
+        hand.setType(evaluator.getType(hand));
+
+        assertEquals(Type.THREE_A_KIND, hand.getType());
     }
 
     @Test

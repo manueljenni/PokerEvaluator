@@ -56,7 +56,22 @@ public class Evaluator {
 
     // Four cards of the same value
     private Boolean isFourAKind(List<Card> cards) {
-        return false;
+        var values = getValues(cards);
+
+        var distinctValues = values.stream()
+                .distinct().toList();
+
+        // If four of a kind, only two
+        // different card types can be present
+        if (distinctValues.size() == 2) {
+
+            // Because of sorting, either first
+            // or last card must be present four times
+            var frequencyOfFirstItem = Collections.frequency(values, distinctValues.get(0));
+            var frequencyOfLastItem = Collections.frequency(values, distinctValues.get(1));
+
+            return frequencyOfFirstItem == 4 || frequencyOfLastItem == 4;
+        } else return false;
     }
 
     // Three cards of the same value
@@ -78,7 +93,7 @@ public class Evaluator {
         // Loop through all cards (except the last) and check
         // if they increase in steps of one
         for (int i = 0; i < values.size() - 1; i++) {
-            if (values.get(i) != (values.get(i+1) -1)) {
+            if (values.get(i) != (values.get(i + 1) - 1)) {
                 return false;
             }
         }
@@ -96,7 +111,23 @@ public class Evaluator {
 
     // Three cards of the same value
     private Boolean isThreeAKind(List<Card> cards) {
-        return false;
+        var values = getValues(cards);
+
+        var distinctValues = values.stream()
+                .distinct().toList();
+
+        // If three of a kind, max. 3
+        // different card types can be present
+        if (distinctValues.size() < 4) {
+
+            // One of the "distinct" cards
+            // must be present 3 times
+            var frequency1 = Collections.frequency(values, distinctValues.get(0));
+            var frequency2 = Collections.frequency(values, distinctValues.get(1));
+            var frequency3 = Collections.frequency(values, distinctValues.get(2));
+
+            return frequency1 == 3 || frequency2 == 3 || frequency3 == 3;
+        } else return false;
     }
 
     // Two different pairs
@@ -122,7 +153,11 @@ public class Evaluator {
     // Checks if all given cards are
     // of the same value
     private Boolean isSameValue(List<Card> cards) {
-        return false;
+        List<Integer> values = getValues(cards);
+
+        return values.stream()
+                .distinct()
+                .count() <= 1;
     }
 
     // Returns all numeric values of the cards
