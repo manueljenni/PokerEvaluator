@@ -74,6 +74,7 @@ public class HandComparerTest {
         assertEquals(hand2, winningHand);
     }
 
+    // Compare if both hands have a "four a kind"
     @Test
     void getWinningHand__FourAKind() {
         Card card1 = Card.builder()
@@ -138,6 +139,7 @@ public class HandComparerTest {
         assertEquals(hand2, winningHand);
     }
 
+    // Compare if both hands have a "full house"
     @Test
     void getWinningHand__FullHouse() {
         Card card1 = Card.builder()
@@ -202,6 +204,7 @@ public class HandComparerTest {
         assertEquals(hand2, winningHand);
     }
 
+    // Compare if both hands have a "straight"
     @Test
     void getWinningHand__Straight() {
         Card card1 = Card.builder()
@@ -267,6 +270,7 @@ public class HandComparerTest {
         assertEquals(hand1, winningHand);
     }
 
+    // Compare if both hands have a "flush"
     @Test
     void getWinningHand__Flush() {
         Card card1 = Card.builder()
@@ -332,6 +336,7 @@ public class HandComparerTest {
         assertEquals(hand1, winningHand);
     }
 
+    // Compare if both hands have a "three a kind"
     @Test
     void getWinningHand__ThreeAKind() {
         Card card1 = Card.builder()
@@ -397,6 +402,7 @@ public class HandComparerTest {
         assertEquals(hand2, winningHand);
     }
 
+    // Compare if both hands have "two pairs"
     @Test
     void getWinningHand__TwoPairs() {
         Card card1 = Card.builder()
@@ -462,6 +468,7 @@ public class HandComparerTest {
         assertEquals(hand2, winningHand);
     }
 
+    // Compare if both hands have two pairs that are both equal
     @Test
     void getWinningHand__TwoPairsEqual() {
         Card card1 = Card.builder()
@@ -527,6 +534,7 @@ public class HandComparerTest {
         assertEquals(hand2, winningHand);
     }
 
+    // Compare if both hands have a "pair"
     @Test
     void getWinningHand__Pair() {
         Card card1 = Card.builder()
@@ -592,6 +600,8 @@ public class HandComparerTest {
         assertEquals(hand2, winningHand);
     }
 
+    // Compare if both hands have a "pair" and also some other equal cards
+    // (testing if the high card logic works)
     @Test
     void getWinningHand__PairEqual() {
         Card card1 = Card.builder()
@@ -635,6 +645,71 @@ public class HandComparerTest {
 
         Card card8 = Card.builder()
                 .rank(Rank.RANK_J)
+                .suit(Suit.D)
+                .build();
+
+        Card card9 = Card.builder()
+                .rank(Rank.RANK_A)
+                .suit(Suit.D)
+                .build();
+
+        Card card10 = Card.builder()
+                .rank(Rank.RANK_5)
+                .suit(Suit.D)
+                .build();
+
+        Hand hand2 = Hand.builder()
+                .cards(List.of(card6, card7, card8, card9, card10))
+                .build();
+
+        var winningHand = handComparer.getWinningHand(hand1, hand2);
+
+        assertEquals(hand2, winningHand);
+    }
+
+    @Test
+    void getWinningHand__highCard() {
+        Card card1 = Card.builder()
+                .rank(Rank.RANK_2)
+                .suit(Suit.D)
+                .build();
+
+        Card card2 = Card.builder()
+                .rank(Rank.RANK_3)
+                .suit(Suit.C)
+                .build();
+
+        Card card3 = Card.builder()
+                .rank(Rank.RANK_7)
+                .suit(Suit.C)
+                .build();
+
+        Card card4 = Card.builder()
+                .rank(Rank.RANK_Q)
+                .suit(Suit.D)
+                .build();
+
+        Card card5 = Card.builder()
+                .rank(Rank.RANK_4)
+                .suit(Suit.S)
+                .build();
+
+        Hand hand1 = Hand.builder()
+                .cards(List.of(card1, card2, card3, card4, card5))
+                .build();
+
+        Card card6 = Card.builder()
+                .rank(Rank.RANK_2)
+                .suit(Suit.D)
+                .build();
+
+        Card card7 = Card.builder()
+                .rank(Rank.RANK_3)
+                .suit(Suit.D)
+                .build();
+
+        Card card8 = Card.builder()
+                .rank(Rank.RANK_4)
                 .suit(Suit.D)
                 .build();
 
