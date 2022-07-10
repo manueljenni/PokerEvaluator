@@ -120,11 +120,11 @@ public class HandComparer {
                         .filter(x -> Collections.frequency(values2, x) == 2)
                         .mapToInt(Integer::intValue).min().orElse(0);
 
-                var lowerPair2 = values1.stream()
+                var lowerPair2 = values2.stream()
                         .filter(x -> Collections.frequency(values2, x) == 2)
                         .mapToInt(Integer::intValue).min().orElse(0);
 
-                var singleValue2 = values1.stream()
+                var singleValue2 = values2.stream()
                         .filter(x -> Collections.frequency(values2, x) == 1)
                         .mapToInt(Integer::intValue).min().orElse(0);
 
@@ -148,6 +148,36 @@ public class HandComparer {
                     }
                 }
 
+            } else if (handType1 == Type.PAIR) {
+
+                var pair1 = values1.stream()
+                        .filter(x -> Collections.frequency(values1, x) == 2)
+                        .mapToInt(Integer::intValue).sum();
+
+                var valuesNotInPair1 = values1.stream()
+                        .filter(x -> Collections.frequency(values1, x) == 1)
+                        .toList();
+
+                var pair2 = values2.stream()
+                        .filter(x -> Collections.frequency(values2, x) == 2)
+                        .mapToInt(Integer::intValue).sum();
+
+                var valuesNotInPai2 = values2.stream()
+                        .filter(x -> Collections.frequency(values2, x) == 1)
+                        .toList();
+
+                if (pair1 > pair2) {
+                    return hand1;
+                } else if (pair1 < pair2) {
+                    return hand2;
+                } else {
+                    for (int i = 0; i < valuesNotInPair1.size(); i++) {
+                        if (valuesNotInPair1.get(i) > valuesNotInPai2.get(i)) {
+                            return hand1;
+                        }
+                    }
+                    return hand2;
+                }
             }
             return hand1;
         }
