@@ -1,5 +1,8 @@
 package com.manueljenni.poker;
 
+import lombok.Getter;
+
+@Getter
 public enum Rank {
     RANK_2(2),  // 2
     RANK_3(3),  // 3

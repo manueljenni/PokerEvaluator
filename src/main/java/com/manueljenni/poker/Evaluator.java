@@ -2,6 +2,7 @@ package com.manueljenni.poker;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Evaluator {
 
@@ -70,7 +71,25 @@ public class Evaluator {
 
     // Five cards with consecutive values
     private Boolean isStraight(List<Card> cards) {
-        return false;
+        var values = getValues(cards);
+
+        // Loop through all cards (except the last) and check
+        // if they increase in steps of one
+        for (int i = 0; i < values.size() - 1; i++) {
+            if (values.get(i) != (values.get(i+1) -1)) {
+                return false;
+            }
+        }
+
+        // Manually check the highest card
+        // to avoid IndexOutOfBounds due to i + 1
+        if (values.get(4) != (values.get(3) + 1)) {
+            return false;
+        }
+
+        // If this part is reached, then all cards
+        // increase in steps of one
+        return true;
     }
 
     // Three cards of the same value
@@ -101,8 +120,14 @@ public class Evaluator {
     }
 
     // Returns all numeric values of the cards
+    // (sorted from lowest to highest)
     private List<Integer> getValues(List<Card> cards) {
-        return Collections.emptyList();
+        return cards.stream()
+                .map(card -> {
+                    return card.getRank().getValue();
+                })
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     // Returns all ranks of the cards as a list of strings

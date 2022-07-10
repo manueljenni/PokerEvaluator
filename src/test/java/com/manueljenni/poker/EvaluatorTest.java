@@ -32,4 +32,42 @@ public class EvaluatorTest {
         assertEquals("A valid hand must consist of exactly 5 cards. You provided 1 cards.",
                 exception.getMessage());
     }
+
+    @Test
+    void getType__isStraight() {
+
+        Card card1 = Card.builder()
+                .rank(Rank.RANK_8)
+                .suit(Suit.H)
+                .build();
+
+        Card card2 = Card.builder()
+                .rank(Rank.RANK_9)
+                .suit(Suit.D)
+                .build();
+
+        Card card3 = Card.builder()
+                .rank(Rank.RANK_T)
+                .suit(Suit.H)
+                .build();
+
+        Card card4 = Card.builder()
+                .rank(Rank.RANK_J)
+                .suit(Suit.H)
+                .build();
+
+        Card card5 = Card.builder()
+                .rank(Rank.RANK_A)
+                .suit(Suit.S)
+                .build();
+
+        Hand hand = Hand.builder()
+                .cards(List.of(card1, card2, card3, card4, card5))
+                .build();
+
+        hand.setType(evaluator.getType(hand));
+
+        assertEquals(Type.STRAIGHT, hand.getType());
+
+    }
 }
